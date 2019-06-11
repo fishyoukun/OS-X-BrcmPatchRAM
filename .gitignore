@@ -5,6 +5,7 @@ Index
 Logs
 TextIndex
 BrcmPatchRAM.xcodeproj/project.xcworkspace/xcuserdata
+BrcmPatchRAM.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 BrcmPatchRAM.xcodeproj/xcuserdata
 scm.plist
 *.xccheckout
@@ -12,3 +13,4 @@ scm.plist
 ModuleCache
 GeneratedFirmwares.cpp
 GeneratedFirmwaresMD5.txt
+Lilu.kext*
