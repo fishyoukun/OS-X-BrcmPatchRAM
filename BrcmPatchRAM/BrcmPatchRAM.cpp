@@ -31,6 +31,8 @@
 #include "hci.h"
 #include "BrcmPatchRAM.h"
 
+#include <Headers/kern_api.hpp>
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 enum { kMyOffPowerState = 0, kMyOnPowerState = 1 };
@@ -61,6 +63,7 @@ extern "C"
 __attribute__((visibility("hidden")))
 kern_return_t BrcmPatchRAM_Start(kmod_info_t* ki, void * d)
 {
+    
 #ifndef NON_RESIDENT
     if (!(BrcmPatchRAM::mLoadFirmwareLock = IOLockAlloc()))
         return KERN_FAILURE;
@@ -84,6 +87,32 @@ kern_return_t BrcmPatchRAM_Stop(kmod_info_t* ki, void * d)
 }
 
 } // extern "C"
+
+void BrcmPatchRAM::processKernel(KernelPatcher &patcher) {
+    if (!startMatching_symbol)
+    {
+        startMatching_symbol = reinterpret_cast<IOCatalogue_startMatching_symbol>(patcher.solveSymbol(KernelPatcher::KernelID, "__ZN11IOCatalogue13startMatchingEPK8OSSymbol"));
+        if (!startMatching_symbol)
+            SYSLOG("BRCMPATCH", "Fail to resolve IOCatalogue::startMatching method, error = %d", patcher.getError());
+    }
+    
+    if (!addDrivers)
+    {
+        addDrivers = reinterpret_cast<IOCatalogue_addDrivers>(patcher.solveSymbol(KernelPatcher::KernelID, "__ZN11IOCatalogue10addDriversEP7OSArrayb"));
+        if (!addDrivers)
+            SYSLOG("BRCMPATCH", "Fail to resolve IOCatalogue::removeDrivers method, error = %d", patcher.getError());
+    }
+    
+    if (!removeDrivers)
+    {
+        removeDrivers = reinterpret_cast<IOCatalogue_removeDrivers>(patcher.solveSymbol(KernelPatcher::KernelID, "__ZN11IOCatalogue13removeDriversEP12OSDictionaryb"));
+        if (!removeDrivers)
+            SYSLOG("BRCMPATCH", "Fail to resolve IOCatalogue::removeDrivers method, error = %d", patcher.getError());
+    }
+    
+    // Ignore all the errors for other processors
+    patcher.clearError();
+}
 
 void BrcmPatchRAM::initBrcmStrings()
 {
@@ -259,6 +288,13 @@ bool BrcmPatchRAM::start(IOService *provider)
 
     if (!super::start(provider))
         return false;
+    
+    callbackBRCMPATCH = this;
+    
+    lilu.onPatcherLoadForce(
+            [](void *user, KernelPatcher &patcher) {
+                callbackBRCMPATCH->processKernel(patcher);
+            }, this);
 
     // place version/build info in ioreg properties RM,Build and RM,Version
     char buf[128];
@@ -624,7 +660,8 @@ void BrcmPatchRAM::removePersonality()
     setNumberInDict(dict, kUSBProductID, mProductId);
     setNumberInDict(dict, kUSBVendorID, mVendorId);
     dict->setObject(kBundleIdentifier, brcmBundleIdentifier);
-    gIOCatalogue->removeDrivers(dict, false); // no nub matching on removal
+    //gIOCatalogue->removeDrivers(dict, false); // no nub matching on removal
+    removeDrivers(gIOCatalogue, dict, false);
 
     // remove generic matching personality
     dict->removeObject(kUSBProductID);
@@ -633,7 +670,8 @@ void BrcmPatchRAM::removePersonality()
     setNumberInDict(dict, "bDeviceClass", 224);
     setNumberInDict(dict, "bDeviceProtocol", 1);
     setNumberInDict(dict, "bDeviceSubClass", 1);
-    gIOCatalogue->removeDrivers(dict, false); // no nub matching on removal
+    //gIOCatalogue->removeDrivers(dict, false); // no nub matching on removal
+    removeDrivers(gIOCatalogue, dict, false);
 
     dict->release();
     
@@ -646,6 +684,8 @@ void BrcmPatchRAM::removePersonality()
 
 void BrcmPatchRAM::publishPersonality()
 {
+    if (!addDrivers || !startMatching_symbol)
+        return;
     // Matching dictionary for the current device
     OSDictionary* dict = OSDictionary::withCapacity(5);
     if (!dict) return;
@@ -690,7 +730,7 @@ void BrcmPatchRAM::publishPersonality()
         if (OSArray* array = OSArray::withCapacity(1))
         {
             array->setObject(dict);
-            if (gIOCatalogue->addDrivers(array, false))
+            if (addDrivers(gIOCatalogue, array, false))
             {
                 AlwaysLog("[%04x:%04x]: Published new IOKit personality.\n", mVendorId, mProductId);
                 if (OSDictionary* dict1 = OSDynamicCast(OSDictionary, dict->copyCollection()))
@@ -700,7 +740,12 @@ void BrcmPatchRAM::publishPersonality()
                     dict1->removeObject(kUSBProductID);
                     dict1->removeObject(kUSBVendorID);
                     dict1->removeObject(kBundleIdentifier);
-                    if (!gIOCatalogue->startMatching(dict1))
+                    
+                    //auto bundle = OSSymbol::withCStringNoCopy(brcmBundleIdentifier->getCStringNoCopy());
+                    //if (!startMatching_symbol(gIOCatalogue, bundle))
+                    //    AlwaysLog("[%04x:%04x]: startMatching failed.\n", mVendorId, mProductId);
+                    auto bundle = OSSymbol::withCStringNoCopy(brcmProviderClass->getCStringNoCopy());
+                    if (!startMatching_symbol(gIOCatalogue, bundle))
                         AlwaysLog("[%04x:%04x]: startMatching failed.\n", mVendorId, mProductId);
                     dict1->release();
                 }
@@ -719,6 +764,8 @@ void BrcmPatchRAM::publishPersonality()
 
 bool BrcmPatchRAM::publishResourcePersonality(const char* classname)
 {
+    if (!addDrivers || !removeDrivers)
+        return false;
     // matching dictionary for disabled BrcmFirmwareStore
     OSDictionary* dict = OSDictionary::withCapacity(3);
     if (!dict) return false;
@@ -758,7 +805,8 @@ bool BrcmPatchRAM::publishResourcePersonality(const char* classname)
     }
 
     // unpublish disabled personality
-    gIOCatalogue->removeDrivers(dict, false);  // no nub matching on removal
+    //gIOCatalogue->removeDrivers(dict, false);  // no nub matching on removal
+    removeDrivers(gIOCatalogue, dict, false);
     dict->release();
 
     // Add new personality into the kernel
@@ -767,7 +815,7 @@ bool BrcmPatchRAM::publishResourcePersonality(const char* classname)
         // change from disabled_IOResources to IOResources
         setStringInDict(personality, kIOProviderClassKey, "IOResources");
         array->setObject(personality);
-        if (gIOCatalogue->addDrivers(array, true))
+        if (addDrivers(gIOCatalogue, array, true))
             AlwaysLog("Published new IOKit personality for %s.\n", classname);
         else
             AlwaysLog("ERROR in addDrivers for new %s personality.\n", classname);

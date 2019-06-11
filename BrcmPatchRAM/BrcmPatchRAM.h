@@ -24,6 +24,8 @@
 #define NON_RESIDENT 1
 #endif
 
+#include <Headers/kern_patcher.hpp>
+
 #include <IOKit/IOInterruptEventSource.h>
 #include <IOKit/IOTimerEventSource.h>
 
@@ -59,6 +61,15 @@ enum DeviceState
 #define BrcmPatchRAM BrcmPatchRAM2
 #endif
 
+using IOCatalogue_startMatching_symbol = bool (*)(void *that, OSSymbol const* bundle_identifier);
+using IOCatalogue_addDrivers = bool (*)(void *that, OSArray *array, bool doNubMatching);
+using IOCatalogue_removeDrivers = bool (*)(void *that, OSDictionary *matching, bool doNubMatching);
+
+// access to IOCatalogue methods
+IOCatalogue_startMatching_symbol startMatching_symbol {};
+IOCatalogue_addDrivers addDrivers {};
+IOCatalogue_removeDrivers removeDrivers {};
+
 extern "C"
 {
 kern_return_t BrcmPatchRAM_Start(kmod_info_t*, void*);
@@ -87,6 +98,9 @@ private:
     USBPipeShim mInterruptPipe;
     USBPipeShim mBulkPipe;
     BrcmFirmwareStore* mFirmwareStore = NULL;
+    
+    void processKernel(KernelPatcher &patcher);
+    
 #ifndef NON_RESIDENT
     bool mStopping = false;
 #endif
@@ -170,13 +184,13 @@ private:
     
     bool performUpgrade();
 public:
-    virtual IOService* probe(IOService *provider, SInt32 *probeScore);
+    virtual IOService* probe(IOService *provider, SInt32 *probeScore) override;
 #ifndef NON_RESIDENT
     virtual bool start(IOService* provider);
     virtual void stop(IOService* provider);
     virtual IOReturn setPowerState(unsigned long which, IOService *whom);
 #endif
-    virtual const char* stringFromReturn(IOReturn rtn);
+    virtual const char* stringFromReturn(IOReturn rtn) override;
 };
 
 #ifdef NON_RESIDENT
@@ -189,7 +203,7 @@ private:
     OSDeclareDefaultStructors(BrcmPatchRAMResidency);
 
 public:
-    virtual bool start(IOService *provider);
+    virtual bool start(IOService *provider) override;
 };
 
 #endif //NON_RESIDENT

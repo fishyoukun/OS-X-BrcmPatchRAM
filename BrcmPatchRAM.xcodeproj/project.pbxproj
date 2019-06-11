@@ -14,20 +14,29 @@
 		841AD8841BB3C0350082B7B0 /* USBDeviceShim.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E0A25B1BA30FD300A5FE05 /* USBDeviceShim.h */; };
 		841AD8851BB3C0350082B7B0 /* hci.h in Headers */ = {isa = PBXBuildFile; fileRef = D45427691A2A045E000B0964 /* hci.h */; };
 		841AD8911BB3C12F0082B7B0 /* FirmwareData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841AD8901BB3C12F0082B7B0 /* FirmwareData.cpp */; };
-		841AD8931BB3C1960082B7B0 /* FirmwareData.h in Headers */ = {isa = PBXBuildFile; fileRef = 841AD8921BB3C1960082B7B0 /* FirmwareData.h */; };
 		842B20BD1BB2F0D900D3C468 /* BrcmPatchRAM.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F91B031A2998CE0030D10D /* BrcmPatchRAM.h */; };
 		842B20BE1BB2F0D900D3C468 /* BrcmFirmwareStore.h in Headers */ = {isa = PBXBuildFile; fileRef = D4049E561A3252B1003A1893 /* BrcmFirmwareStore.h */; };
 		842B20BF1BB2F0D900D3C468 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = D454276C1A2A07A7000B0964 /* Common.h */; };
 		842B20C01BB2F0D900D3C468 /* USBDeviceShim.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E0A25B1BA30FD300A5FE05 /* USBDeviceShim.h */; };
 		842B20C11BB2F0D900D3C468 /* hci.h in Headers */ = {isa = PBXBuildFile; fileRef = D45427691A2A045E000B0964 /* hci.h */; };
 		842B20CC1BB2F0F800D3C468 /* BrcmFirmwareStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4049E551A3252B1003A1893 /* BrcmFirmwareStore.cpp */; };
-		D4049E581A3252B1003A1893 /* BrcmFirmwareStore.h in Headers */ = {isa = PBXBuildFile; fileRef = D4049E561A3252B1003A1893 /* BrcmFirmwareStore.h */; };
+		AA10D50022AEFC750071A5ED /* plugin_start.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA10D4FD22AEFC750071A5ED /* plugin_start.cpp */; };
+		AA10D50122AEFC750071A5ED /* LegacyIOService.h in Headers */ = {isa = PBXBuildFile; fileRef = AA10D4FE22AEFC750071A5ED /* LegacyIOService.h */; };
+		AA10D50222AEFC750071A5ED /* libkmod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA10D4FF22AEFC750071A5ED /* libkmod.a */; };
+		AA10D51822AEFC890071A5ED /* kern_patcher.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D50322AEFC870071A5ED /* kern_patcher.hpp */; };
+		AA10D51922AEFC890071A5ED /* kern_policy.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D50422AEFC870071A5ED /* kern_policy.hpp */; };
+		AA10D51A22AEFC890071A5ED /* kern_config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D50522AEFC870071A5ED /* kern_config.hpp */; };
+		AA10D51C22AEFC890071A5ED /* kern_user.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D50722AEFC870071A5ED /* kern_user.hpp */; };
+		AA10D51D22AEFC890071A5ED /* kern_iokit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D50822AEFC870071A5ED /* kern_iokit.hpp */; };
+		AA10D52122AEFC890071A5ED /* kern_mach.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D50C22AEFC880071A5ED /* kern_mach.hpp */; };
+		AA10D52322AEFC890071A5ED /* kern_file.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D50E22AEFC880071A5ED /* kern_file.hpp */; };
+		AA10D52422AEFC890071A5ED /* kern_disasm.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D50F22AEFC880071A5ED /* kern_disasm.hpp */; };
+		AA10D52622AEFC890071A5ED /* plugin_start.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D51122AEFC880071A5ED /* plugin_start.hpp */; };
+		AA10D52922AEFC890071A5ED /* kern_api.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D51422AEFC890071A5ED /* kern_api.hpp */; };
+		AA10D52B22AEFC890071A5ED /* kern_util.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AA10D51622AEFC890071A5ED /* kern_util.hpp */; };
+		AA258EE222AF0EF5000F62C3 /* kern_start.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA258EE122AF0EF5000F62C3 /* kern_start.cpp */; };
 		D45C93E01BA3549A006D3FB8 /* USBHostDeviceShim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45C93DF1BA3549A006D3FB8 /* USBHostDeviceShim.cpp */; };
-		D4E0A25D1BA30FD300A5FE05 /* USBDeviceShim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4E0A25A1BA30FD300A5FE05 /* USBDeviceShim.cpp */; };
 		D4E0A25E1BA30FD300A5FE05 /* USBDeviceShim.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E0A25B1BA30FD300A5FE05 /* USBDeviceShim.h */; };
-		D4E0A25F1BA30FD300A5FE05 /* USBDeviceShim.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E0A25B1BA30FD300A5FE05 /* USBDeviceShim.h */; };
-		D4F91B041A2998CE0030D10D /* BrcmPatchRAM.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F91B031A2998CE0030D10D /* BrcmPatchRAM.h */; };
-		D4F91B061A2998CE0030D10D /* BrcmPatchRAM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4F91B051A2998CE0030D10D /* BrcmPatchRAM.cpp */; };
 		ED5817BE1B7A6AEF006C5522 /* BrcmPatchRAM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4F91B051A2998CE0030D10D /* BrcmPatchRAM.cpp */; };
 		ED5817C11B7A6AEF006C5522 /* BrcmPatchRAM.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F91B031A2998CE0030D10D /* BrcmPatchRAM.h */; };
 		ED5817C21B7A6AEF006C5522 /* BrcmFirmwareStore.h in Headers */ = {isa = PBXBuildFile; fileRef = D4049E561A3252B1003A1893 /* BrcmFirmwareStore.h */; };
@@ -116,9 +125,7 @@
 		ED7829361D198D5500CC16F5 /* BCM43142A0_001.001.011.0311.0346_v4442.zhx in Resources */ = {isa = PBXBuildFile; fileRef = EDBFC21D1D18750800DA4B64 /* BCM43142A0_001.001.011.0311.0346_v4442.zhx */; };
 		ED7829371D198D5500CC16F5 /* BCM43142A0_001.001.011.0311.0347_v4443.zhx in Resources */ = {isa = PBXBuildFile; fileRef = EDBFC21E1D18750800DA4B64 /* BCM43142A0_001.001.011.0311.0347_v4443.zhx */; };
 		EDA03B781BA47A0E005BDCA2 /* hci.h in Headers */ = {isa = PBXBuildFile; fileRef = D45427691A2A045E000B0964 /* hci.h */; };
-		EDA03B791BA47A0F005BDCA2 /* hci.h in Headers */ = {isa = PBXBuildFile; fileRef = D45427691A2A045E000B0964 /* hci.h */; };
 		EDA03B7A1BA47A12005BDCA2 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = D454276C1A2A07A7000B0964 /* Common.h */; };
-		EDA03B7B1BA47A12005BDCA2 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = D454276C1A2A07A7000B0964 /* Common.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,15 +149,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		842B20C41BB2F0D900D3C468 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D406C2F11A43C69100AEFA2D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -206,6 +204,21 @@
 		842B20A11BB2EFA200D3C468 /* BrcmFirmwareRepo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BrcmFirmwareRepo-Info.plist"; sourceTree = "<group>"; };
 		842B20C91BB2F0D900D3C468 /* BrcmFirmwareRepo.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrcmFirmwareRepo.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		8480E9531BB4312200FF61B0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AA10D4FD22AEFC750071A5ED /* plugin_start.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plugin_start.cpp; sourceTree = "<group>"; };
+		AA10D4FE22AEFC750071A5ED /* LegacyIOService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegacyIOService.h; sourceTree = "<group>"; };
+		AA10D4FF22AEFC750071A5ED /* libkmod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkmod.a; sourceTree = "<group>"; };
+		AA10D50322AEFC870071A5ED /* kern_patcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_patcher.hpp; sourceTree = "<group>"; };
+		AA10D50422AEFC870071A5ED /* kern_policy.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_policy.hpp; sourceTree = "<group>"; };
+		AA10D50522AEFC870071A5ED /* kern_config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_config.hpp; sourceTree = "<group>"; };
+		AA10D50722AEFC870071A5ED /* kern_user.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_user.hpp; sourceTree = "<group>"; };
+		AA10D50822AEFC870071A5ED /* kern_iokit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_iokit.hpp; sourceTree = "<group>"; };
+		AA10D50C22AEFC880071A5ED /* kern_mach.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_mach.hpp; sourceTree = "<group>"; };
+		AA10D50E22AEFC880071A5ED /* kern_file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_file.hpp; sourceTree = "<group>"; };
+		AA10D50F22AEFC880071A5ED /* kern_disasm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_disasm.hpp; sourceTree = "<group>"; };
+		AA10D51122AEFC880071A5ED /* plugin_start.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = plugin_start.hpp; sourceTree = "<group>"; };
+		AA10D51422AEFC890071A5ED /* kern_api.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_api.hpp; sourceTree = "<group>"; };
+		AA10D51622AEFC890071A5ED /* kern_util.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kern_util.hpp; sourceTree = "<group>"; };
+		AA258EE122AF0EF5000F62C3 /* kern_start.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = kern_start.cpp; sourceTree = "<group>"; };
 		D4049E551A3252B1003A1893 /* BrcmFirmwareStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrcmFirmwareStore.cpp; sourceTree = "<group>"; };
 		D4049E561A3252B1003A1893 /* BrcmFirmwareStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrcmFirmwareStore.h; sourceTree = "<group>"; };
 		D45427691A2A045E000B0964 /* hci.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hci.h; sourceTree = "<group>"; };
@@ -213,11 +226,9 @@
 		D45C93DF1BA3549A006D3FB8 /* USBHostDeviceShim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USBHostDeviceShim.cpp; sourceTree = "<group>"; };
 		D4E0A25A1BA30FD300A5FE05 /* USBDeviceShim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USBDeviceShim.cpp; sourceTree = "<group>"; };
 		D4E0A25B1BA30FD300A5FE05 /* USBDeviceShim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBDeviceShim.h; sourceTree = "<group>"; };
-		D4F91AFE1A2998CE0030D10D /* BrcmPatchRAM.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrcmPatchRAM.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F91B021A2998CE0030D10D /* BrcmPatchRAM-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BrcmPatchRAM-Info.plist"; sourceTree = "<group>"; };
 		D4F91B031A2998CE0030D10D /* BrcmPatchRAM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrcmPatchRAM.h; sourceTree = "<group>"; };
 		D4F91B051A2998CE0030D10D /* BrcmPatchRAM.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BrcmPatchRAM.cpp; sourceTree = "<group>"; };
-		D4F91B121A299C210030D10D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		ED2A7DD61B37DE6E00DC200F /* BrcmBluetoothInjector.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrcmBluetoothInjector.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED2A7DD71B37DE6F00DC200F /* BrcmBluetoothInjector-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BrcmBluetoothInjector-Info.plist"; sourceTree = SOURCE_ROOT; };
 		ED4CA64B1B86437100EBED28 /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; usesTabs = 1; };
@@ -330,13 +341,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4F91AFA1A2998CE0030D10D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ED2A7DCC1B37DE6E00DC200F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -348,6 +352,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA10D50222AEFC750071A5ED /* libkmod.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,13 +373,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D406C2F61A43C6E200AEFA2D /* Frameworks */ = {
+		AA10D4FA22AEFAE10071A5ED /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				D4F91B121A299C210030D10D /* IOKit.framework */,
+				AA10D4FB22AEFAF40071A5ED /* Headers */,
+				AA10D4FC22AEFB0B0071A5ED /* Library */,
 			);
-			name = Frameworks;
+			name = SDK;
 			sourceTree = "<group>";
+		};
+		AA10D4FB22AEFAF40071A5ED /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				AA10D51422AEFC890071A5ED /* kern_api.hpp */,
+				AA10D50522AEFC870071A5ED /* kern_config.hpp */,
+				AA10D50F22AEFC880071A5ED /* kern_disasm.hpp */,
+				AA10D50E22AEFC880071A5ED /* kern_file.hpp */,
+				AA10D50822AEFC870071A5ED /* kern_iokit.hpp */,
+				AA10D50C22AEFC880071A5ED /* kern_mach.hpp */,
+				AA10D50322AEFC870071A5ED /* kern_patcher.hpp */,
+				AA10D50422AEFC870071A5ED /* kern_policy.hpp */,
+				AA10D50722AEFC870071A5ED /* kern_user.hpp */,
+				AA10D51622AEFC890071A5ED /* kern_util.hpp */,
+				AA10D51122AEFC880071A5ED /* plugin_start.hpp */,
+			);
+			name = Headers;
+			path = Lilu.kext/Contents/Resources/Headers;
+			sourceTree = SOURCE_ROOT;
+		};
+		AA10D4FC22AEFB0B0071A5ED /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				AA10D4FE22AEFC750071A5ED /* LegacyIOService.h */,
+				AA10D4FF22AEFC750071A5ED /* libkmod.a */,
+				AA10D4FD22AEFC750071A5ED /* plugin_start.cpp */,
+			);
+			name = Library;
+			path = Lilu.kext/Contents/Resources/Library;
+			sourceTree = SOURCE_ROOT;
 		};
 		D43475541BB1CFFE00BA7661 /* Resources */ = {
 			isa = PBXGroup;
@@ -476,7 +512,7 @@
 				ED4CA64B1B86437100EBED28 /* makefile */,
 				841AD8941BB3C27E0082B7B0 /* generate_firmware_data.sh */,
 				EDA673B31BB4D2F5004A85A6 /* print_version.sh */,
-				D406C2F61A43C6E200AEFA2D /* Frameworks */,
+				AA10D4FA22AEFAE10071A5ED /* SDK */,
 				D4F91B001A2998CE0030D10D /* BrcmPatchRAM */,
 				D4F91AFF1A2998CE0030D10D /* Products */,
 			);
@@ -485,7 +521,6 @@
 		D4F91AFF1A2998CE0030D10D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D4F91AFE1A2998CE0030D10D /* BrcmPatchRAM.kext */,
 				ED2A7DD61B37DE6E00DC200F /* BrcmBluetoothInjector.kext */,
 				ED5817C91B7A6AEF006C5522 /* BrcmPatchRAM2.kext */,
 				842B20C91BB2F0D900D3C468 /* BrcmFirmwareRepo.kext */,
@@ -514,6 +549,7 @@
 				ED7470FA1D184D06005F75F1 /* BrcmNonPatchRAM */,
 				ED2A7DD91B37DEAD00DC200F /* BrcmBluetoothInjector */,
 				D43475541BB1CFFE00BA7661 /* Resources */,
+				AA258EE122AF0EF5000F62C3 /* kern_start.cpp */,
 			);
 			path = BrcmPatchRAM;
 			sourceTree = "<group>";
@@ -575,19 +611,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4F91AFB1A2998CE0030D10D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D4F91B041A2998CE0030D10D /* BrcmPatchRAM.h in Headers */,
-				841AD8931BB3C1960082B7B0 /* FirmwareData.h in Headers */,
-				D4049E581A3252B1003A1893 /* BrcmFirmwareStore.h in Headers */,
-				EDA03B7B1BA47A12005BDCA2 /* Common.h in Headers */,
-				D4E0A25F1BA30FD300A5FE05 /* USBDeviceShim.h in Headers */,
-				EDA03B791BA47A0F005BDCA2 /* hci.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ED2A7DCD1B37DE6E00DC200F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -600,10 +623,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED5817C11B7A6AEF006C5522 /* BrcmPatchRAM.h in Headers */,
+				AA10D50122AEFC750071A5ED /* LegacyIOService.h in Headers */,
 				ED5817C21B7A6AEF006C5522 /* BrcmFirmwareStore.h in Headers */,
+				AA10D52622AEFC890071A5ED /* plugin_start.hpp in Headers */,
+				AA10D51D22AEFC890071A5ED /* kern_iokit.hpp in Headers */,
 				EDA03B7A1BA47A12005BDCA2 /* Common.h in Headers */,
+				AA10D51922AEFC890071A5ED /* kern_policy.hpp in Headers */,
+				AA10D52422AEFC890071A5ED /* kern_disasm.hpp in Headers */,
+				AA10D51822AEFC890071A5ED /* kern_patcher.hpp in Headers */,
+				AA10D52122AEFC890071A5ED /* kern_mach.hpp in Headers */,
 				D4E0A25E1BA30FD300A5FE05 /* USBDeviceShim.h in Headers */,
+				AA10D51C22AEFC890071A5ED /* kern_user.hpp in Headers */,
+				AA10D52322AEFC890071A5ED /* kern_file.hpp in Headers */,
+				AA10D52922AEFC890071A5ED /* kern_api.hpp in Headers */,
+				AA10D52B22AEFC890071A5ED /* kern_util.hpp in Headers */,
 				EDA03B781BA47A0E005BDCA2 /* hci.h in Headers */,
+				AA10D51A22AEFC890071A5ED /* kern_config.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,26 +715,6 @@
 			name = BrcmFirmwareRepo;
 			productName = BrcmPatchRAM;
 			productReference = 842B20C91BB2F0D900D3C468 /* BrcmFirmwareRepo.kext */;
-			productType = "com.apple.product-type.kernel-extension";
-		};
-		D4F91AFD1A2998CE0030D10D /* BrcmPatchRAM */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D4F91B091A2998CE0030D10D /* Build configuration list for PBXNativeTarget "BrcmPatchRAM" */;
-			buildPhases = (
-				D4F91AF91A2998CE0030D10D /* Sources */,
-				D4F91AFA1A2998CE0030D10D /* Frameworks */,
-				D4F91AFB1A2998CE0030D10D /* Headers */,
-				D4F91AFC1A2998CE0030D10D /* Resources */,
-				D406C2F11A43C69100AEFA2D /* CopyFiles */,
-				D42C3CF71A64053D0073C2A1 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BrcmPatchRAM;
-			productName = BrcmPatchRAM;
-			productReference = D4F91AFE1A2998CE0030D10D /* BrcmPatchRAM.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
 		ED2A7DC81B37DE6E00DC200F /* BrcmBluetoothInjector */ = {
@@ -793,9 +808,6 @@
 					84CDEE051BB3CA2200238DD1 = {
 						CreatedOnToolsVersion = 7.0;
 					};
-					D4F91AFD1A2998CE0030D10D = {
-						CreatedOnToolsVersion = 6.1;
-					};
 				};
 			};
 			buildConfigurationList = D4F91AF81A2998CE0030D10D /* Build configuration list for PBXProject "BrcmPatchRAM" */;
@@ -803,6 +815,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = D4F91AF41A2998CE0030D10D;
@@ -812,7 +825,6 @@
 			targets = (
 				84CDEE051BB3CA2200238DD1 /* Prebuild */,
 				ED5817BB1B7A6AEF006C5522 /* BrcmPatchRAM2 */,
-				D4F91AFD1A2998CE0030D10D /* BrcmPatchRAM */,
 				841AD87C1BB3C0350082B7B0 /* BrcmFirmwareData */,
 				842B20B71BB2F0D900D3C468 /* BrcmFirmwareRepo */,
 				ED7470ED1D184C5D005F75F1 /* BrcmNonPatchRAM */,
@@ -921,13 +933,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4F91AFC1A2998CE0030D10D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ED2A7DD01B37DE6E00DC200F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -974,20 +979,6 @@
 			showEnvVarsInLog = 0;
 		};
 		842B20C51BB2F0D900D3C468 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ -e Build/Debug ] && [ -e Build/Release ]; then tar -czf Build/BrcmPatchRAM.tar.gz Build/Debug Build/Release; fi";
-			showEnvVarsInLog = 0;
-		};
-		D42C3CF71A64053D0073C2A1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1077,15 +1068,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4F91AF91A2998CE0030D10D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D4F91B061A2998CE0030D10D /* BrcmPatchRAM.cpp in Sources */,
-				D4E0A25D1BA30FD300A5FE05 /* USBDeviceShim.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ED2A7DC91B37DE6E00DC200F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1097,8 +1079,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA258EE222AF0EF5000F62C3 /* kern_start.cpp in Sources */,
 				ED5817BE1B7A6AEF006C5522 /* BrcmPatchRAM.cpp in Sources */,
 				D45C93E01BA3549A006D3FB8 /* USBHostDeviceShim.cpp in Sources */,
+				AA10D50022AEFC750071A5ED /* plugin_start.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1282,35 +1266,6 @@
 			};
 			name = Release;
 		};
-		D4F91B0A1A2998CE0030D10D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"LOGNAME=\\\"${LOGNAME}\\\"",
-				);
-				INFOPLIST_FILE = "BrcmPatchRAM/BrcmPatchRAM-Info.plist";
-				MODULE_NAME = "com.no-one.BrcmPatchRAM";
-				MODULE_START = BrcmPatchRAM_Start;
-				MODULE_STOP = BrcmPatchRAM_Stop;
-				PRODUCT_NAME = BrcmPatchRAM;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Debug;
-		};
-		D4F91B0B1A2998CE0030D10D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = "LOGNAME=\\\"${LOGNAME}\\\"";
-				INFOPLIST_FILE = "BrcmPatchRAM/BrcmPatchRAM-Info.plist";
-				MODULE_NAME = "com.no-one.BrcmPatchRAM";
-				MODULE_START = BrcmPatchRAM_Start;
-				MODULE_STOP = BrcmPatchRAM_Stop;
-				PRODUCT_NAME = BrcmPatchRAM;
-				WRAPPER_EXTENSION = kext;
-			};
-			name = Release;
-		};
 		ED2A7DD41B37DE6E00DC200F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1338,12 +1293,23 @@
 		ED5817C71B7A6AEF006C5522 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1y";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"TARGET_ELCAPITAN=1",
 					"DEBUG=1",
 					"LOGNAME=\\\"${LOGNAME}\\\"",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lilu.kext/Contents/Resources",
+				);
 				INFOPLIST_FILE = "BrcmPatchRAM/BrcmPatchRAM2-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lilu.kext/Contents/Resources/Library",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULE_NAME = "com.no-one.BrcmPatchRAM";
 				MODULE_START = BrcmPatchRAM_Start;
@@ -1357,11 +1323,22 @@
 		ED5817C81B7A6AEF006C5522 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1y";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"TARGET_ELCAPITAN=1",
 					"LOGNAME=\\\"${LOGNAME}\\\"",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lilu.kext/Contents/Resources",
+				);
 				INFOPLIST_FILE = "BrcmPatchRAM/BrcmPatchRAM2-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lilu.kext/Contents/Resources/Library",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MODULE_NAME = "com.no-one.BrcmPatchRAM";
 				MODULE_START = BrcmPatchRAM_Start;
@@ -1455,15 +1432,6 @@
 			buildConfigurations = (
 				D4F91B071A2998CE0030D10D /* Debug */,
 				D4F91B081A2998CE0030D10D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D4F91B091A2998CE0030D10D /* Build configuration list for PBXNativeTarget "BrcmPatchRAM" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D4F91B0A1A2998CE0030D10D /* Debug */,
-				D4F91B0B1A2998CE0030D10D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
