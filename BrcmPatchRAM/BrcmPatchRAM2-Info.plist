@@ -29,7 +29,7 @@
 			<key>IOMatchCategory</key>
 			<string>BrcmPatchRAMResidency</string>
 			<key>IOProviderClass</key>
-			<string>disabled_IOResources</string>
+			<string>IOResources</string>
 		</dict>
 		<key>0489_e032</key>
 		<dict>

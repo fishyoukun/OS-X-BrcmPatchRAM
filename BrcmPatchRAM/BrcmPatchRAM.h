@@ -19,6 +19,15 @@
 #ifndef __BrcmPatchRAM__
 #define __BrcmPatchRAM__
 
+#include <Headers/kern_util.hpp>
+
+#ifdef DEBUG
+#define DebugLog(args...) do { SYSLOG(BRCMPATCHRAM_NAME, args); } while (0)
+#else
+#define DebugLog(args...) do { } while (0)
+#endif
+#define AlwaysLog(args...) do { SYSLOG(BRCMPATCHRAM_NAME, args); } while (0)
+
 #ifdef TARGET_ELCAPITAN
 // 10.11 works better if probe simply exits after updating firmware
 #define NON_RESIDENT 1
@@ -61,20 +70,27 @@ enum DeviceState
 #define BrcmPatchRAM BrcmPatchRAM2
 #endif
 
-using IOCatalogue_startMatching_symbol = bool (*)(void *that, OSSymbol const* bundle_identifier);
-using IOCatalogue_addDrivers = bool (*)(void *that, OSArray *array, bool doNubMatching);
-using IOCatalogue_removeDrivers = bool (*)(void *that, OSDictionary *matching, bool doNubMatching);
-
-// access to IOCatalogue methods
-IOCatalogue_startMatching_symbol startMatching_symbol {};
-IOCatalogue_addDrivers addDrivers {};
-IOCatalogue_removeDrivers removeDrivers {};
-
 extern "C"
 {
 kern_return_t BrcmPatchRAM_Start(kmod_info_t*, void*);
 kern_return_t BrcmPatchRAM_Stop(kmod_info_t*, void*);
 }
+
+/*
+class EventManager {
+  using CBType = void(*)(void*);
+  
+  CBType* callbacks = nullptr;
+  void** contexts = nullptr;
+  vm_size_t count = 0;
+public:
+  EventManager();
+  ~EventManager();
+  
+  void addCallback(CBType callback, void* context = nullptr);
+  void dispatch();
+};
+ */
 
 class BrcmPatchRAM : public IOService
 {

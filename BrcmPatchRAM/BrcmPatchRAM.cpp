@@ -30,6 +30,7 @@
 #include "Common.h"
 #include "hci.h"
 #include "BrcmPatchRAM.h"
+#include "symbols.h"
 
 #include <Headers/kern_api.hpp>
 
@@ -88,31 +89,9 @@ kern_return_t BrcmPatchRAM_Stop(kmod_info_t* ki, void * d)
 
 } // extern "C"
 
-void BrcmPatchRAM::processKernel(KernelPatcher &patcher) {
-    if (!startMatching_symbol)
-    {
-        startMatching_symbol = reinterpret_cast<IOCatalogue_startMatching_symbol>(patcher.solveSymbol(KernelPatcher::KernelID, "__ZN11IOCatalogue13startMatchingEPK8OSSymbol"));
-        if (!startMatching_symbol)
-            SYSLOG("BRCMPATCH", "Fail to resolve IOCatalogue::startMatching method, error = %d", patcher.getError());
-    }
-    
-    if (!addDrivers)
-    {
-        addDrivers = reinterpret_cast<IOCatalogue_addDrivers>(patcher.solveSymbol(KernelPatcher::KernelID, "__ZN11IOCatalogue10addDriversEP7OSArrayb"));
-        if (!addDrivers)
-            SYSLOG("BRCMPATCH", "Fail to resolve IOCatalogue::removeDrivers method, error = %d", patcher.getError());
-    }
-    
-    if (!removeDrivers)
-    {
-        removeDrivers = reinterpret_cast<IOCatalogue_removeDrivers>(patcher.solveSymbol(KernelPatcher::KernelID, "__ZN11IOCatalogue13removeDriversEP12OSDictionaryb"));
-        if (!removeDrivers)
-            SYSLOG("BRCMPATCH", "Fail to resolve IOCatalogue::removeDrivers method, error = %d", patcher.getError());
-    }
-    
-    // Ignore all the errors for other processors
-    patcher.clearError();
-}
+extern IOCatalogue_startMatching_symbol ADDPR(startMatching_symbol);
+extern IOCatalogue_addDrivers ADDPR(addDrivers);
+extern IOCatalogue_removeDrivers ADDPR(removeDrivers);
 
 void BrcmPatchRAM::initBrcmStrings()
 {
@@ -258,12 +237,12 @@ IOService* BrcmPatchRAM::probe(IOService *provider, SInt32 *probeScore)
     // get firmware here to pre-cache for eventual use on wakeup or now
     if (OSString* firmwareKey = OSDynamicCast(OSString, getProperty(kFirmwareKey)))
     {
-        if (BrcmFirmwareStore* firmwareStore = getFirmwareStore())
-            firmwareStore->getFirmware(mVendorId, mProductId, firmwareKey);
+      if (BrcmFirmwareStore* firmwareStore = getFirmwareStore())
+        firmwareStore->getFirmware(mVendorId, mProductId, firmwareKey);
     }
 
     IOSleep(mProbeDelay);
-
+    
     uploadFirmware();
     publishPersonality();
 
@@ -288,13 +267,6 @@ bool BrcmPatchRAM::start(IOService *provider)
 
     if (!super::start(provider))
         return false;
-    
-    callbackBRCMPATCH = this;
-    
-    lilu.onPatcherLoadForce(
-            [](void *user, KernelPatcher &patcher) {
-                callbackBRCMPATCH->processKernel(patcher);
-            }, this);
 
     // place version/build info in ioreg properties RM,Build and RM,Version
     char buf[128];
@@ -660,8 +632,8 @@ void BrcmPatchRAM::removePersonality()
     setNumberInDict(dict, kUSBProductID, mProductId);
     setNumberInDict(dict, kUSBVendorID, mVendorId);
     dict->setObject(kBundleIdentifier, brcmBundleIdentifier);
-    //gIOCatalogue->removeDrivers(dict, false); // no nub matching on removal
-    removeDrivers(gIOCatalogue, dict, false);
+    //gIOCatalogue->ADDPR(removeDrivers)(dict, false); // no nub matching on removal
+    ADDPR(removeDrivers)(gIOCatalogue, dict, false);
 
     // remove generic matching personality
     dict->removeObject(kUSBProductID);
@@ -670,8 +642,8 @@ void BrcmPatchRAM::removePersonality()
     setNumberInDict(dict, "bDeviceClass", 224);
     setNumberInDict(dict, "bDeviceProtocol", 1);
     setNumberInDict(dict, "bDeviceSubClass", 1);
-    //gIOCatalogue->removeDrivers(dict, false); // no nub matching on removal
-    removeDrivers(gIOCatalogue, dict, false);
+    //gIOCatalogue->ADDPR(removeDrivers)(dict, false); // no nub matching on removal
+    ADDPR(removeDrivers)(gIOCatalogue, dict, false);
 
     dict->release();
     
@@ -684,7 +656,7 @@ void BrcmPatchRAM::removePersonality()
 
 void BrcmPatchRAM::publishPersonality()
 {
-    if (!addDrivers || !startMatching_symbol)
+    if (!ADDPR(addDrivers) || !ADDPR(startMatching_symbol))
         return;
     // Matching dictionary for the current device
     OSDictionary* dict = OSDictionary::withCapacity(5);
@@ -730,7 +702,7 @@ void BrcmPatchRAM::publishPersonality()
         if (OSArray* array = OSArray::withCapacity(1))
         {
             array->setObject(dict);
-            if (addDrivers(gIOCatalogue, array, false))
+            if (ADDPR(addDrivers)(gIOCatalogue, array, false))
             {
                 AlwaysLog("[%04x:%04x]: Published new IOKit personality.\n", mVendorId, mProductId);
                 if (OSDictionary* dict1 = OSDynamicCast(OSDictionary, dict->copyCollection()))
@@ -742,10 +714,10 @@ void BrcmPatchRAM::publishPersonality()
                     dict1->removeObject(kBundleIdentifier);
                     
                     //auto bundle = OSSymbol::withCStringNoCopy(brcmBundleIdentifier->getCStringNoCopy());
-                    //if (!startMatching_symbol(gIOCatalogue, bundle))
+                    //if (!ADDPR(startMatching_symbol)(gIOCatalogue, bundle))
                     //    AlwaysLog("[%04x:%04x]: startMatching failed.\n", mVendorId, mProductId);
                     auto bundle = OSSymbol::withCStringNoCopy(brcmProviderClass->getCStringNoCopy());
-                    if (!startMatching_symbol(gIOCatalogue, bundle))
+                    if (!ADDPR(startMatching_symbol)(gIOCatalogue, bundle))
                         AlwaysLog("[%04x:%04x]: startMatching failed.\n", mVendorId, mProductId);
                     dict1->release();
                 }
@@ -764,7 +736,7 @@ void BrcmPatchRAM::publishPersonality()
 
 bool BrcmPatchRAM::publishResourcePersonality(const char* classname)
 {
-    if (!addDrivers || !removeDrivers)
+    if (!ADDPR(addDrivers) || !ADDPR(removeDrivers))
         return false;
     // matching dictionary for disabled BrcmFirmwareStore
     OSDictionary* dict = OSDictionary::withCapacity(3);
@@ -805,8 +777,8 @@ bool BrcmPatchRAM::publishResourcePersonality(const char* classname)
     }
 
     // unpublish disabled personality
-    //gIOCatalogue->removeDrivers(dict, false);  // no nub matching on removal
-    removeDrivers(gIOCatalogue, dict, false);
+    //gIOCatalogue->ADDPR(removeDrivers)(dict, false);  // no nub matching on removal
+    ADDPR(removeDrivers)(gIOCatalogue, dict, false);
     dict->release();
 
     // Add new personality into the kernel
@@ -815,7 +787,7 @@ bool BrcmPatchRAM::publishResourcePersonality(const char* classname)
         // change from disabled_IOResources to IOResources
         setStringInDict(personality, kIOProviderClassKey, "IOResources");
         array->setObject(personality);
-        if (addDrivers(gIOCatalogue, array, true))
+        if (ADDPR(addDrivers)(gIOCatalogue, array, true))
             AlwaysLog("Published new IOKit personality for %s.\n", classname);
         else
             AlwaysLog("ERROR in addDrivers for new %s personality.\n", classname);
@@ -1181,7 +1153,7 @@ IOReturn BrcmPatchRAM::hciParseResponse(void* response, UInt16 length, void* out
                     DebugLog("[%04x:%04x]: Returning output data %d bytes.\n", mVendorId, mProductId, length);
                     
                     *outputLength = length;
-                    memcpy(output, response, length);
+                    lilu_os_memcpy(output, response, length);
                 }
                 else
                     // Not enough buffer space for data
@@ -1470,3 +1442,38 @@ bool BrcmPatchRAMResidency::start(IOService *provider)
 }
 
 #endif
+
+/*
+EventManager::EventManager() {
+  callbacks = (CBType*)IOMalloc(0);
+  contexts = (void**)IOMalloc(0);
+};
+EventManager::~EventManager() {
+  IOFree(callbacks, count * sizeof(CBType));
+  IOFree(contexts, count * sizeof(void*));
+};
+
+void EventManager::addCallback(CBType callback, void* context) {
+  ++count;
+  auto size = count * sizeof(CBType);
+  auto size2 = count * sizeof(void*);
+  auto tmp = IOMalloc(size);
+  auto tmp2 = IOMalloc(size2);
+  lilu_os_memcpy(tmp, callbacks, size);
+  lilu_os_memcpy(tmp2, contexts, size2);
+  IOFree(callbacks, (count - 1) * sizeof(CBType));
+  IOFree(contexts, (count - 1) * sizeof(void*));
+  callbacks = (CBType*)tmp;
+  contexts = (void**)tmp2;
+  callbacks[count - 1] = callback;
+  contexts[count - 1] = context;
+};
+
+void EventManager::dispatch() {
+  for (vm_size_t i = 0; i < count; i++) {
+    if (callbacks[i]) {
+      callbacks[i](contexts[i]);
+    }
+  }
+};
+*/

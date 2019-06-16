@@ -14,3 +14,4 @@ ModuleCache
 GeneratedFirmwares.cpp
 GeneratedFirmwaresMD5.txt
 Lilu.kext*
+build
